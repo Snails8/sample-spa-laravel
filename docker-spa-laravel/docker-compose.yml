@@ -3,7 +3,7 @@ services:
   nginx:
     container_name: sample-spa-nginx
     build:
-      context: .docker/nginx
+      context: docker/nginx
       dockerfile: Dockerfile
     ports:
       - 80:80
@@ -16,7 +16,7 @@ services:
   api:
     container_name: sample-spa-api
     build:
-      context: .docker/api
+      context: docker/api
       dockerfile: Dockerfile
     environment:
       LANG: 'ja_JP.UTF-8'
