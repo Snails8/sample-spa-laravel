@@ -1,7 +1,7 @@
 version: '3'
 services:
   nginx:
-    container_name: sample-spa-laravel
+    container_name: sample-spa-nginx
     build:
       context: .docker/nginx
       dockerfile: Dockerfile
