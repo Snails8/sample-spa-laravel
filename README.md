@@ -1,2 +1,1 @@
-# docker-spa-laravel
-# docker-spa-next
+# sample-spa-laravel
