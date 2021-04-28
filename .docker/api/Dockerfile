@@ -16,7 +16,7 @@ COPY conf/docker.conf /usr/local/etc/php-fpm.d/docker.conf
 
 # install composer
 RUN curl -sS https://getcomposer.org/installer | php && \
-    mv composer.phar /usr.local/bin/composer && \
+    mv composer.phar /usr/local/bin/composer && \
     chmod +x /usr/local/bin/composer
 
 WORKDIR /app
