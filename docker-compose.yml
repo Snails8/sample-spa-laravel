@@ -57,6 +57,6 @@ services:
     ports:
     - 5432:5432
 
-  networks:
-    default:
-      name: sample-sap
+networks:
+  default:
+    name: sample-sap
