@@ -1,0 +1,62 @@
+version: '3'
+services:
+  nginx:
+    container_name: sample-spa-laravel
+    build:
+      context: .docker/nginx
+      dockerfile: Dockerfile
+    ports:
+    - 80:80
+    volumes:
+    - .:/app
+    tty: true
+    depends_on:
+      - api
+
+  api:
+    container_name: sample-spa-api
+    build:
+      context: .docker/api
+      dockerfile: Dockerfile
+    environment:
+      LANG: 'ja_JP.UTF-8'
+      TZ: 'Asia/Tokyo'
+      APP_NAME: 'Laravel'
+      APP_ENV: 'development'
+      APP_DEBUG: 'true'
+      APP_URL: 'http://localhost'
+      LOG_CHANNEL: 'stderr'
+      DB_CONNECTION: 'pgsql'
+      DB_HOST: 'db'
+      DB_PORT: '5432'
+      DB_DATABASE: 'laravel_development'
+      DB_DATABASE_TEST: 'laravel_testing'
+      DB_USERNAME: 'docker'
+      DB_PASSWORD: 'docker'
+    env_file:
+      - .env
+    volumes:
+      - .:/app
+    expose:
+      - 9000
+    tty: true
+    depends_on:
+      - db
+
+  db:
+    image: postgres:12-alpine
+    container_name: sample-spa-db
+    environment:
+      TZ: 'Asia/Tokyo'
+      POSTGRES_USER: 'docker'
+      POSTGRESS_PASSWORD: 'docker'
+      POSTGRESS_DB: 'laravel_development'
+    volumes:
+    - ./.docker/db/data:/var/lib/postgresql/data
+    - ./.docker/db/sql:/docker-entrypoint-initdb.d
+    ports:
+    - 5432:5432
+
+  networks:
+    default:
+      name: sample-sap
