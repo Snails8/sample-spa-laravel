@@ -14,18 +14,22 @@ use Illuminate\Support\Facades\Auth;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::prefix('auth')->group(function () {
-    Route::post('/login', [LoginController::class, 'login']);
-});
 
-Route::middleware('auth:api')->group(function () {
-    Route::get('/user', function () {
-        return Auth::user();
+// admin用
+Route::prefix('admin')->group(function () {
+    // 認証処理
+    Route::prefix('auth')->group(function() {
+        Route::post('/login', [LoginController::class, 'login']);
     });
 
-    // Users
-    Route::resource('users', UserController::class)->only([
-        'index'
-    ]);
+    Route::middleware('auth:api')->group(function () {
+        Route::get('/user', function () {
+            return Auth::user();
+        });
 
+        // Users
+        Route::resource('users', UserController::class)->only([
+            'index'
+        ]);
+    });
 });
