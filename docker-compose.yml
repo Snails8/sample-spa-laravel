@@ -28,7 +28,7 @@ services:
       LOG_CHANNEL: 'stderr'
       DB_CONNECTION: 'pgsql'
       DB_HOST: 'db'
-      DB_PORT: '5432'
+      DB_PORT: '5432'x
       DB_DATABASE: 'laravel_development'
       DB_DATABASE_TEST: 'laravel_testing'
       DB_USERNAME: 'docker'
